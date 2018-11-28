@@ -126,6 +126,15 @@ export default [
         component: () => import('@/view/components/drag-list/drag-list.vue')
       },
       {
+        path: 'tree_table_page',
+        name: 'tree_table_page',
+        meta: {
+          icon: 'md-git-branch',
+          title: '树状表格'
+        },
+        component: () => import('@/view/components/tree-table/index.vue')
+      },
+      {
         path: 'cropper_page',
         name: 'cropper_page',
         meta: {
@@ -372,7 +381,16 @@ export default [
               icon: 'md-funnel',
               title: '三级'
             },
-            component: () => import('@/view/multilevel/level-2-2/level-3-1.vue')
+            component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
+          },
+          {
+            path: 'level_2_2_2',
+            name: 'level_2_2_2',
+            meta: {
+              icon: 'md-funnel',
+              title: '三级'
+            },
+            component: () => import('@/view/multilevel/level-2-2/level-2-2-2.vue')
           }
         ]
       },

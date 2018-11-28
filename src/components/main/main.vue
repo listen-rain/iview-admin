@@ -12,7 +12,7 @@
     <Layout>
       <Header class="header-con">
         <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
-          <user :message-unread-count="messageUnreadCount" :user-avator="userAvator"/>
+          <user :message-unread-count="unreadCount" :user-avator="userAvator"/>
           <language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/>
           <error-store v-if="$config.plugin['error-store'] && $config.plugin['error-store'].showInHeader" :has-read="hasReadErrorPage" :count="errorCount"></error-store>
           <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
@@ -27,6 +27,7 @@
             <keep-alive :include="cacheList">
               <router-view/>
             </keep-alive>
+            <ABackTop :height="100" :bottom="80" :right="50" container=".content-wrapper"></ABackTop>
           </Content>
         </Layout>
       </Content>
@@ -38,6 +39,7 @@ import SideMenu from './components/side-menu'
 import HeaderBar from './components/header-bar'
 import TagsNav from './components/tags-nav'
 import User from './components/user'
+import ABackTop from './components/a-back-top'
 import Fullscreen from './components/fullscreen'
 import Language from './components/language'
 import ErrorStore from './components/error-store'
@@ -56,7 +58,8 @@ export default {
     TagsNav,
     Fullscreen,
     ErrorStore,
-    User
+    User,
+    ABackTop
   },
   data () {
     return {
@@ -68,8 +71,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'errorCount',
-      'messageUnreadCount'
+      'errorCount'
     ]),
     tagNavList () {
       return this.$store.state.app.tagNavList
@@ -91,6 +93,9 @@ export default {
     },
     hasReadErrorPage () {
       return this.$store.state.app.hasReadErrorPage
+    },
+    unreadCount () {
+      return this.$store.state.user.unreadCount
     }
   },
   methods: {
@@ -102,7 +107,8 @@ export default {
       'setHomeRoute'
     ]),
     ...mapActions([
-      'handleLogin'
+      'handleLogin',
+      'getUnreadMessageCount'
     ]),
     turnToPage (route) {
       let { name, params, query } = {}
@@ -170,6 +176,8 @@ export default {
         name: this.$config.homeName
       })
     }
+    // 获取未读消息条数
+    this.getUnreadMessageCount()
   }
 }
 </script>

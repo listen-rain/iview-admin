@@ -21,6 +21,7 @@ export default {
   level_2_3: 'Level-2-3',
   level_2_2: 'Level-2-2',
   level_2_2_1: 'Level-2-2-1',
+  level_2_2_2: 'Level-2-2-2',
   excel: 'Excel',
   'upload-excel': '上传excel',
   'export-excel': '导出excel',
@@ -36,5 +37,6 @@ export default {
   query: '带参路由',
   params: '动态路由',
   cropper_page: '图片裁剪',
-  message_page: '消息中心'
+  message_page: '消息中心',
+  tree_table_page: '树状表格'
 }
